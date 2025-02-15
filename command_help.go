@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
-func commandHelp() error {
+func commandHelp(cfg *config) error {
 	fmt.Println()
-	fmt.Println("Welcome to the Lotr Companion App!")
+	fmt.Println("Welcome to the LOTR Companion App!")
 	fmt.Println("Usage:")
 	fmt.Println()
 	for _, cmd := range getCommands() {

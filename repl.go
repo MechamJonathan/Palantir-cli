@@ -5,7 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
 )
+
+type config struct {
+	theoneapiClient theoneapi.Client
+	nextBookURL     *string
+}
 
 func cleanInput(text string) []string {
 	output := strings.ToLower(text)
@@ -13,7 +20,7 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func startRepl() {
+func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -29,7 +36,7 @@ func startRepl() {
 
 		command, exists := getCommands()[commandName]
 		if exists {
-			err := command.callback()
+			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -44,7 +51,7 @@ func startRepl() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -53,6 +60,11 @@ func getCommands() map[string]cliCommand {
 			name:        "help",
 			description: "Displays help message",
 			callback:    commandHelp,
+		},
+		"books": {
+			name:        "books",
+			description: "Lists all LOTR books",
+			callback:    getBooks,
 		},
 		"exit": {
 			name:        "exit",
