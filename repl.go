@@ -11,7 +11,6 @@ import (
 
 type config struct {
 	theoneapiClient theoneapi.Client
-	nextBookURL     *string
 }
 
 func cleanInput(text string) []string {
