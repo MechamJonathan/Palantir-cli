@@ -2,34 +2,33 @@ package theoneapi
 
 import (
 	"encoding/json"
-	"errors"
 	"io"
 	"net/http"
 )
 
-func (c *Client) ListBooks() (booksResponse, error) {
+func (c *Client) ListBooks() (BooksResponse, error) {
 	url := baseURL + "/book"
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return booksResponse{}, errors.New("error")
+		return BooksResponse{}, err
 	}
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return booksResponse{}, err
+		return BooksResponse{}, err
 	}
 	defer resp.Body.Close()
 
 	dat, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return booksResponse{}, err
+		return BooksResponse{}, err
 	}
 
-	booksResp := booksResponse{}
+	booksResp := BooksResponse{}
 	err = json.Unmarshal(dat, &booksResp)
 	if err != nil {
-		return booksResponse{}, err
+		return BooksResponse{}, err
 	}
 
 	return booksResp, nil

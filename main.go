@@ -1,13 +1,26 @@
 package main
 
 import (
+	"log"
+	"os"
 	"time"
 
 	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	theoneClient := theoneapi.NewClient(5 * time.Second)
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
+	}
+
+	apiKey := os.Getenv("API_KEY")
+	if apiKey == "" {
+		log.Fatal("API_KEY not set in .env file")
+	}
+
+	theoneClient := theoneapi.NewClient(5*time.Second, apiKey)
 	cfg := &config{
 		theoneapiClient: theoneClient,
 	}
