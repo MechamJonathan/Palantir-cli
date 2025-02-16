@@ -65,6 +65,11 @@ func getCommands() map[string]cliCommand {
 			description: "Lists all LOTR books",
 			callback:    getBooks,
 		},
+		"movies": {
+			name:        "movies",
+			description: "List all LOTR movies",
+			callback:    getMovies,
+		},
 		"exit": {
 			name:        "exit",
 			description: "exit the program",
