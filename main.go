@@ -20,11 +20,10 @@ func main() {
 		log.Fatal("API_KEY not set in .env file")
 	}
 
-	theoneClient := theoneapi.NewClient(5*time.Second, apiKey)
+	theoneClient := theoneapi.NewClient(5*time.Second, time.Minute*5, apiKey)
 	cfg := &config{
 		theoneapiClient: theoneClient,
 	}
 
 	startRepl(cfg)
-
 }
