@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func commandGetMovie(cfg *config, args ...string) error {
+func commandGetMovieDetails(cfg *config, args ...string) error {
 	movieName := strings.Join(args, " ")
 	//fmt.Println("Args received:", args)
 
