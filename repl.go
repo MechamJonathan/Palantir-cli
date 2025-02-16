@@ -77,7 +77,7 @@ func getCommands() map[string]cliCommand {
 		"details": {
 			name:        "details",
 			description: "Return details about Movie",
-			callback:    commandGetMovie,
+			callback:    commandGetMovieDetails,
 		},
 		"exit": {
 			name:        "exit",
