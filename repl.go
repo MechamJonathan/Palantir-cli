@@ -32,10 +32,14 @@ func startRepl(cfg *config) {
 		}
 
 		commandName := words[0]
+		args := []string{}
+		if len(words) > 1 {
+			args = words[1:]
+		}
 
 		command, exists := getCommands()[commandName]
 		if exists {
-			err := command.callback(cfg)
+			err := command.callback(cfg, args...)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -50,7 +54,7 @@ func startRepl(cfg *config) {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config, ...string) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -63,12 +67,17 @@ func getCommands() map[string]cliCommand {
 		"books": {
 			name:        "books",
 			description: "Lists all LOTR books",
-			callback:    getBooks,
+			callback:    commandGetBooks,
 		},
 		"movies": {
 			name:        "movies",
 			description: "List all LOTR movies",
-			callback:    getMovies,
+			callback:    commandGetMovies,
+		},
+		"details": {
+			name:        "details",
+			description: "Return details about Movie",
+			callback:    commandGetMovie,
 		},
 		"exit": {
 			name:        "exit",

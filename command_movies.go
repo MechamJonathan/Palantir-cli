@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func getMovies(cfg *config) error {
+func commandGetMovies(cfg *config, args ...string) error {
 	movieResp, err := cfg.theoneapiClient.ListMovies()
 	if err != nil {
 		return err
