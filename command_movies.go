@@ -8,9 +8,9 @@ func commandGetMovies(cfg *config, args ...string) error {
 		return err
 	}
 
-	fmt.Println("\n--List of Movies--")
+	fmt.Println("\n---List of Movies---")
 	for _, movie := range movieResp.Docs {
-		fmt.Println(" -", movie.Name, " id:", movie.ID)
+		fmt.Println(" -", movie.Name)
 	}
 	fmt.Println("")
 	return nil
