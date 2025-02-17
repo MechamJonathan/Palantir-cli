@@ -85,5 +85,4 @@ func getCommands() map[string]cliCommand {
 			callback:    commandExit,
 		},
 	}
-
 }
