@@ -21,7 +21,7 @@ func commandGetDetails(cfg *config, args ...string) error {
 			return err
 		}
 		fmt.Println("\n--- Movie Details ---")
-		fmt.Printf("Name: %s\nID: %s\nRuntime: %d min\nBudget: $%.2fM\nBox Office: $%.2fM\nAwards: %d nominations, %d wins\nRotten Tomatoes: %.1f%%\n\n",
+		fmt.Printf(" - Name: %s\n - ID: %s\n - Runtime: %d min\n - Budget: $%.2fM\n - Box Office: $%.2fM\n - Awards: %d nominations, %d wins\n - Rotten Tomatoes: %.1f%%\n\n",
 			movieResp.Name, movieResp.ID, movieResp.RuntimeInMinutes, movieResp.BudgetInMillions,
 			movieResp.BoxOfficeRevenueInMillions, movieResp.AcademyAwardNominations, movieResp.AcademyAwardWins,
 			movieResp.RottenTomatoesScore)
@@ -32,7 +32,7 @@ func commandGetDetails(cfg *config, args ...string) error {
 			return err
 		}
 		fmt.Println("\n--- Book Details ---")
-		fmt.Printf("Name: %s\n\n", bookResp.Name)
+		fmt.Printf(" - Name: %s\n - No additional details available currently\n\n", bookResp.Name)
 
 	default:
 		return errors.New("invalid type. Use 'details book <name>' or 'details movie <name>'")
