@@ -8,7 +8,7 @@ func commandGetBooks(cfg *config, args ...string) error {
 		return err
 	}
 
-	fmt.Println("\n---List of Books---")
+	fmt.Println("\n--- List of Books ---")
 	for _, book := range booksResp.Docs {
 		fmt.Println(" -", book.Name)
 	}
