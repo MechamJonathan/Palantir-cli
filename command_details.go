@@ -7,24 +7,26 @@ import (
 )
 
 func commandGetDetails(cfg *config, args ...string) error {
-	if len(args) < 2 {
-		return errors.New("usage: details [book|movie|character] <name>")
+	if len(args) < 1 {
+		return errors.New("usage: details <character name>|<movie>|<book>")
 	}
 
-	inputType := strings.ToLower(args[0])
-	inputName := strings.Join(args[1:], " ")
+	inputName := strings.Join(args, " ")
 
-	switch inputType {
-	case "movie":
-		return fetchMovieDetails(cfg, inputName)
-	case "book":
-		return fetchBookDetails(cfg, inputName)
-	case "character":
-		return fetchCharacterDetails(cfg, inputName)
-	default:
-		return errors.New("invalid type. Use 'details book <name>', 'details movie <name>', or 'details character <name>")
+	err := fetchCharacterDetails(cfg, inputName)
+	if err == nil {
+		return nil
 	}
 
+	movieErr := fetchMovieDetails(cfg, inputName)
+
+	bookErr := fetchBookDetails(cfg, inputName)
+
+	if movieErr != nil && bookErr != nil {
+		return fmt.Errorf("no details found for: %s", inputName)
+	}
+
+	return fmt.Errorf("no details found for: %s", inputName)
 }
 
 func fetchMovieDetails(cfg *config, name string) error {

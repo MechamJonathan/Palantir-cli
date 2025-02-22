@@ -6,6 +6,9 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"unicode"
+
+	"golang.org/x/text/unicode/norm"
 )
 
 func (c *Client) GetCharacterByName(characterName string) (Character, error) {
@@ -22,13 +25,25 @@ func (c *Client) GetCharacterByName(characterName string) (Character, error) {
 	}
 
 	for _, character := range charResp.Docs {
-		if strings.ToLower(character.Name) == characterNameLower {
-			c.cache.Add("character:"+strings.ToLower(character.Name), []byte(character.ID))
+		if strings.ToLower(removeDiacritics(character.Name)) == characterNameLower {
+			c.cache.Add("character:"+strings.ToLower(removeDiacritics(character.Name)), []byte(character.ID))
 			return c.FetchCharacterByID(character.ID)
 		}
 	}
 
 	return Character{}, errors.New("Character not found")
+}
+
+func removeDiacritics(s string) string {
+	s = norm.NFD.String(s)
+	result := []rune{}
+	for _, r := range s {
+		if unicode.Is(unicode.Mn, r) {
+			continue
+		}
+		result = append(result, r)
+	}
+	return string(result)
 }
 
 func (c *Client) FetchCharacterByID(characterID string) (Character, error) {
