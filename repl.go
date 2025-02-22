@@ -10,7 +10,8 @@ import (
 )
 
 type config struct {
-	theoneapiClient theoneapi.Client
+	theoneapiClient  theoneapi.Client
+	currentQuotePage int
 }
 
 func cleanInput(text string) []string {
@@ -21,6 +22,7 @@ func cleanInput(text string) []string {
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
+	cfg.currentQuotePage = 0
 
 	for {
 		fmt.Print("Lotr-Companion-App > ")
@@ -83,6 +85,16 @@ func getCommands() map[string]cliCommand {
 			name:        "details",
 			description: "Return details about Movie or Book",
 			callback:    commandGetDetails,
+		},
+		"quotes": {
+			name:        "quotes",
+			description: "List next page of quotes",
+			callback:    commandQuotesf,
+		},
+		"quotesb": {
+			name:        "quotesb",
+			description: "Gets previous page of quotes",
+			callback:    commandQuotesb,
 		},
 		"exit": {
 			name:        "exit",

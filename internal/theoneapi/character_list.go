@@ -8,6 +8,7 @@ import (
 )
 
 func (c *Client) ListCharacters() (CharacterResponse, error) {
+
 	url := baseURL + "/character?sort=name:asc"
 
 	if val, ok := c.cache.Get(url); ok {
