@@ -73,7 +73,7 @@ func getCommands() map[string]cliCommand {
 		},
 		"characters": {
 			name:        "characters",
-			description: "Lists all characters",
+			description: "Lists all characters or group of characters",
 			callback:    commandGetCharacters,
 		},
 		"movies": {
@@ -83,7 +83,7 @@ func getCommands() map[string]cliCommand {
 		},
 		"details": {
 			name:        "details",
-			description: "Return details about Movie or Book",
+			description: "Return details about Character, Movie, or Book",
 			callback:    commandGetDetails,
 		},
 		"quotes": {

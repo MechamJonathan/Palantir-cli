@@ -8,7 +8,6 @@ import (
 )
 
 func (c *Client) ListCharacters() (CharacterResponse, error) {
-
 	url := baseURL + "/character?sort=name:asc"
 
 	if val, ok := c.cache.Get(url); ok {
@@ -45,10 +44,8 @@ func (c *Client) ListCharacters() (CharacterResponse, error) {
 		return CharacterResponse{}, err
 	}
 
-	// Cache full response
 	c.cache.Add(url, dat)
 
-	// Cache individual movie names -> IDs
 	for _, char := range charResp.Docs {
 		c.cache.Add("character:"+strings.ToLower(char.Name), []byte(char.ID))
 	}
