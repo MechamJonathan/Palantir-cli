@@ -13,7 +13,7 @@ func (c *Client) GetCharacterByName(characterName string) (Character, error) {
 
 	if val, ok := c.cache.Get("character:" + characterNameLower); ok {
 		characterID := string(val)
-		return c.fetchCharacterByID(characterID)
+		return c.FetchCharacterByID(characterID)
 	}
 
 	charResp, err := c.ListCharacters()
@@ -24,14 +24,14 @@ func (c *Client) GetCharacterByName(characterName string) (Character, error) {
 	for _, character := range charResp.Docs {
 		if strings.ToLower(character.Name) == characterNameLower {
 			c.cache.Add("character:"+strings.ToLower(character.Name), []byte(character.ID))
-			return c.fetchCharacterByID(character.ID)
+			return c.FetchCharacterByID(character.ID)
 		}
 	}
 
 	return Character{}, errors.New("Character not found")
 }
 
-func (c *Client) fetchCharacterByID(characterID string) (Character, error) {
+func (c *Client) FetchCharacterByID(characterID string) (Character, error) {
 	url := baseURL + "/character/" + characterID
 
 	if val, ok := c.cache.Get(url); ok {
@@ -77,5 +77,5 @@ func (c *Client) fetchCharacterByID(characterID string) (Character, error) {
 		return charResp.Docs[0], nil
 	}
 
-	return Character{}, errors.New("Book not found in API response")
+	return Character{}, errors.New("Character not found in API response")
 }
