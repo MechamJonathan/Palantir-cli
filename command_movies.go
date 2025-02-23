@@ -8,7 +8,8 @@ func commandGetMovies(cfg *config, args ...string) error {
 		return err
 	}
 
-	fmt.Println("\n---List of Movies---")
+	fmt.Printf("\n%-20s\n", "Movies")
+	fmt.Println("--------------------")
 	for _, movie := range movieResp.Docs {
 		fmt.Println(" -", movie.Name)
 	}
