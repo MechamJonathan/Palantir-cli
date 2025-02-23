@@ -3,12 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 func commandQuotesf(cfg *config, args ...string) error {
+	inputName := strings.Join(args, " ")
+
 	cfg.currentQuotePage += 1
 
-	quotesResp, err := cfg.theoneapiClient.ListQuotes(cfg.currentQuotePage)
+	quotesResp, err := cfg.theoneapiClient.ListQuotes(inputName, cfg.currentQuotePage)
 	if err != nil {
 		return err
 	}
@@ -24,6 +27,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 }
 
 func commandQuotesb(cfg *config, args ...string) error {
+	inputName := strings.Join(args, " ")
 
 	if cfg.currentQuotePage <= 1 {
 		return errors.New("you're on the first page of quotes")
@@ -31,7 +35,7 @@ func commandQuotesb(cfg *config, args ...string) error {
 
 	cfg.currentQuotePage -= 1
 
-	quotesResp, err := cfg.theoneapiClient.ListQuotes(cfg.currentQuotePage)
+	quotesResp, err := cfg.theoneapiClient.ListQuotes(inputName, cfg.currentQuotePage)
 	if err != nil {
 		return err
 	}

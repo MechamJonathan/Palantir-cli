@@ -7,8 +7,13 @@ import (
 	"net/http"
 )
 
-func (c *Client) ListQuotes(nextPage int) (QuoteResponse, error) {
-	url := fmt.Sprintf("%s/quote?limit=20&page=%d", baseURL, nextPage)
+func (c *Client) ListQuotes(characterName string, nextPage int) (QuoteResponse, error) {
+	character, err := c.GetCharacterByName(characterName)
+	if err != nil {
+		return QuoteResponse{}, err
+	}
+
+	url := fmt.Sprintf("%s/character/%s/quote?limit=20&page=%d", baseURL, character.ID, nextPage)
 
 	if val, ok := c.cache.Get(url); ok {
 		quoteResp := QuoteResponse{}
@@ -61,5 +66,6 @@ func (c *Client) ListQuotes(nextPage int) (QuoteResponse, error) {
 	enhancedData, _ := json.Marshal(quoteResp)
 	c.cache.Add(url, enhancedData)
 
+	fmt.Print("RESPONSE:", quoteResp)
 	return quoteResp, nil
 }
