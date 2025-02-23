@@ -14,10 +14,10 @@ func commandQuotesf(cfg *config, args ...string) error {
 	}
 
 	for _, quote := range quotesResp.Docs {
-		fmt.Printf("=====================================\n")
+		fmt.Printf("------------------------------------------\n")
 		fmt.Printf("\"%s\"\n", quote.Dialog)
 		fmt.Printf("- By %s\n", quote.CharacterName)
-		fmt.Printf("=====================================\n\n")
+		fmt.Printf("------------------------------------------\n\n")
 	}
 
 	return nil
@@ -26,7 +26,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 func commandQuotesb(cfg *config, args ...string) error {
 
 	if cfg.currentQuotePage <= 1 {
-		return errors.New("you're on the first page")
+		return errors.New("you're on the first page of quotes")
 	}
 
 	cfg.currentQuotePage -= 1
@@ -37,10 +37,10 @@ func commandQuotesb(cfg *config, args ...string) error {
 	}
 
 	for _, quote := range quotesResp.Docs {
-		fmt.Printf("=====================================\n")
+		fmt.Printf("------------------------------------------\n")
 		fmt.Printf("\"%s\"\n", quote.Dialog)
 		fmt.Printf("- By %s\n", quote.CharacterName)
-		fmt.Printf("=====================================\n\n")
+		fmt.Printf("------------------------------------------\n\n")
 	}
 
 	return nil
