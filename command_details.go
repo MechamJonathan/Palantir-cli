@@ -20,15 +20,11 @@ func commandGetDetails(cfg *config, args ...string) error {
 
 	movieErr := fetchMovieDetails(cfg, inputName)
 	bookErr := fetchBookDetails(cfg, inputName)
-	if movieErr == nil {
+	if movieErr == nil || bookErr == nil {
 		return nil
 	}
-
-	if movieErr != nil && bookErr != nil {
-		return fmt.Errorf("no details found for: %s", inputName)
-	}
-
 	return fmt.Errorf("no details found for: %s", inputName)
+
 }
 
 func fetchMovieDetails(cfg *config, name string) error {
