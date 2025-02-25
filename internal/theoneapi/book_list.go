@@ -2,6 +2,7 @@ package theoneapi
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"strings"
@@ -36,16 +37,18 @@ func (c *Client) ListBooks() (BooksResponse, error) {
 		return BooksResponse{}, err
 	}
 
+	if len(dat) == 0 {
+		return BooksResponse{}, errors.New("received empty response from API")
+	}
+
 	booksResp := BooksResponse{}
 	err = json.Unmarshal(dat, &booksResp)
 	if err != nil {
 		return BooksResponse{}, err
 	}
 
-	// Cache full response
 	c.cache.Add(url, dat)
 
-	// Cache individual movie names -> IDs
 	for _, book := range booksResp.Docs {
 		c.cache.Add("book:"+strings.ToLower(book.Name), []byte(book.ID))
 	}

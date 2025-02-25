@@ -2,6 +2,7 @@ package theoneapi
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"strings"
@@ -36,6 +37,10 @@ func (c *Client) ListCharacters() (CharacterResponse, error) {
 	dat, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return CharacterResponse{}, err
+	}
+
+	if len(dat) == 0 {
+		return CharacterResponse{}, errors.New("received empty response from API")
 	}
 
 	charResp := CharacterResponse{}
