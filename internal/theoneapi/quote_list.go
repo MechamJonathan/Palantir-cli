@@ -2,6 +2,7 @@ package theoneapi
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -43,6 +44,10 @@ func (c *Client) ListQuotes(characterName string, nextPage int) (QuoteResponse, 
 		return QuoteResponse{}, err
 	}
 
+	if len(dat) == 0 {
+		return QuoteResponse{}, errors.New("received empty response from API")
+	}
+
 	quoteResp := QuoteResponse{}
 	err = json.Unmarshal(dat, &quoteResp)
 	if err != nil {
@@ -66,6 +71,9 @@ func (c *Client) ListQuotes(characterName string, nextPage int) (QuoteResponse, 
 	enhancedData, _ := json.Marshal(quoteResp)
 	c.cache.Add(url, enhancedData)
 
-	fmt.Print("RESPONSE:", quoteResp)
+	if len(quoteResp.Docs) == 0 {
+		return quoteResp, errors.New("no quotes found for character")
+	}
+
 	return quoteResp, nil
 }

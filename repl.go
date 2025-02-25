@@ -10,8 +10,9 @@ import (
 )
 
 type config struct {
-	theoneapiClient  theoneapi.Client
-	currentQuotePage int
+	theoneapiClient      theoneapi.Client
+	currentQuotePage     int
+	currentCharacterName string
 }
 
 func cleanInput(text string) []string {
@@ -93,12 +94,12 @@ func getCommands() map[string]cliCommand {
 		},
 		"quotes": {
 			name:        "quotes",
-			description: "List next page of all quotes",
+			description: "List next page of a character's quotes",
 			callback:    commandQuotesf,
 		},
 		"quotesb": {
 			name:        "quotesb",
-			description: "Gets previous page of all quotes",
+			description: "Gets previous page of a character's quotes",
 			callback:    commandQuotesb,
 		},
 		"exit": {

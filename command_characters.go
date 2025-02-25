@@ -123,8 +123,3 @@ func printGroupMembers(title string, groupMembers []string, characters []theonea
 		}
 	}
 }
-
-// func printHeader(title string) {
-// 	fmt.Printf("\n%-20s\n", title)
-// 	fmt.Println("--------------------")
-// }
