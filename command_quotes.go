@@ -49,12 +49,11 @@ func commandQuotesb(cfg *config, args ...string) error {
 	return nil
 }
 
-func printQuotes(quotes []theoneapi.Quote) error {
+func printQuotes(quotes []theoneapi.Quote) {
 	for _, quote := range quotes {
 		fmt.Printf("------------------------------------------\n")
 		fmt.Printf("\"%s\"\n", quote.Dialog)
 		fmt.Printf("- %s\n", quote.CharacterName)
 		fmt.Printf("------------------------------------------\n\n")
 	}
-	return nil
 }
