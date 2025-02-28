@@ -4,6 +4,9 @@
 
 A command-line interface (CLI) application written in Go that functions as a companion app. This application allows users to retrieve information about Lord of the Rings movies, books, and characters using The-One-Api (https://the-one-api.dev/).
 
+## Why?
+This CLI application is designed for fans of The Lord of the Rings who want fun, quick, and easy access to information about the books, movies, and characters. Whether you're looking up quotes, exploring Middle-earth lore, or just need a reference guide, this tool provides an efficient way to find details without searching through multiple sources.
+
 ## Features 
 - Retrieve a a list of _Lord of the Rings_ books, movies, characters.
 - Get details about specific books, movies, characters.
