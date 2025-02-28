@@ -1,6 +1,10 @@
 # Lotr-Companion-App CLI
 A command-line interface (CLI) application written in Go that functions as a companion app. This application allows users to retrieve information about Lord of the Rings movies, books, and characters using The-One-Api (https://the-one-api.dev/).
 
+<p>
+    <a href="https://github.com/mechamjonathan/lotr-companion-app/workflows"><img src="https://github.com/mechamjonathan/lotr-companion-app/workflows/ci.yml/badge.svg" alt="CI Status"></a>
+</p>
+
 ## Features 
 - Retrieve a a list of _Lord of the Rings_ books, movies, characters.
 - Get details about specific books, movies, characters.
