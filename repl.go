@@ -69,12 +69,12 @@ func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
 		"help": {
 			name:        "help",
-			description: "Displays help message",
+			description: "Display help message and all available commands",
 			callback:    commandHelp,
 		},
 		"books": {
 			name:        "books",
-			description: "Lists all LOTR books",
+			description: "Lists all books",
 			callback:    commandGetBooks,
 		},
 		"characters": {
@@ -89,22 +89,22 @@ func getCommands() map[string]cliCommand {
 		},
 		"details": {
 			name:        "details",
-			description: "Return details about Character, Movie, or Book",
+			description: "Return details about specific character, movie, or book",
 			callback:    commandGetDetails,
 		},
 		"quotes": {
 			name:        "quotes",
-			description: "List next page of a character's quotes",
+			description: "View next page of a character's quotes",
 			callback:    commandQuotesf,
 		},
 		"quotesb": {
 			name:        "quotesb",
-			description: "Gets previous page of a character's quotes",
+			description: "View previous page of a character's quotes  ",
 			callback:    commandQuotesb,
 		},
 		"exit": {
 			name:        "exit",
-			description: "exit the program",
+			description: "Exit the program",
 			callback:    commandExit,
 		},
 	}
