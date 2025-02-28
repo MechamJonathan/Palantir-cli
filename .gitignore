@@ -1,4 +1,4 @@
 lotr-companion-app
 repl.log
 .env
-
+.DS_Store
