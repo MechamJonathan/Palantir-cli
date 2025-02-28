@@ -1,6 +1,6 @@
 # Lotr-Companion-App CLI
 <p align="center">
-  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/logo.jpg" width="350" title="hover text">
+  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/logo.jpg" width="350" title="logo">
 </p>
 
 ![badge](https://github.com/MechamJonathan/lotr-companion-app/actions/workflows/ci.yml/badge.svg?event=pull_request)
