@@ -1,6 +1,6 @@
 # Lotr-Companion-App CLI
 
-![badge](https://github.com/MechamJonathan/lotr-companion-app/actions/workflows/ci.yml/badge.svg)
+![badge](https://github.com/MechamJonathan/lotr-companion-app/actions/workflows/ci.yml/badge.svg?event=pull_request)
 
 A command-line interface (CLI) application written in Go that functions as a companion app. This application allows users to retrieve information about Lord of the Rings movies, books, and characters using The-One-Api (https://the-one-api.dev/).
 
