@@ -19,6 +19,7 @@ This CLI application is designed for fans of The Lord of the Rings who want fun,
 ## Requirements
 - Go (version 1.18 or later)
 - Internet connection (to fetch data from The-One-Api)
+- Register at https://the-one-api.dev/ to get an access token
 
 ## Contributing
 ### Installation 
@@ -26,12 +27,16 @@ This CLI application is designed for fans of The Lord of the Rings who want fun,
 ```
 git clone https://github.com/MechamJonathan/lotr-companion-app
 cd lotr-companion-app
-go build
+```
+2. Create a .env file at the root of the project with the following:
+```
+API_KEY = "{Your Access Token}"
 ```
 
 ### Run Application
-In the lotr-companion-app directory run the following command:
+Build the application and then run the executable:
 ```
+go build
 ./lotr-companion-app
 ```
 # Commands
