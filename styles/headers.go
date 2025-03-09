@@ -1,15 +1,22 @@
 package styles
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"github.com/charmbracelet/lipgloss"
+)
 
 var Header = lipgloss.NewStyle().
 	Bold(true).
-	Width(63).
-	Align(lipgloss.Center)
+	Width(70).
+	Align(lipgloss.Center).
+	PaddingTop(2).
+	PaddingRight(4).
+	PaddingBottom(2).
+	PaddingLeft(4)
 
 var SubHeader = lipgloss.NewStyle().
 	Align(lipgloss.Center).
-	Width(63).
+	Width(70).
+	PaddingBottom(1).
 	Align(lipgloss.Center).
 	Faint(true)
 
@@ -17,22 +24,9 @@ var TableHeader = lipgloss.NewStyle().
 	Bold(true).
 	Align(lipgloss.Center)
 
-var TableText = lipgloss.NewStyle().
-	Align(lipgloss.Left)
-
-var myCuteBorder = lipgloss.Border{
-	Top:         "._.:*:",
-	Bottom:      "._.:*:",
-	Left:        "|*",
-	Right:       "|*",
-	TopLeft:     "*",
-	TopRight:    "*",
-	BottomLeft:  "*",
-	BottomRight: "*",
-}
-
-var BorderHeader = lipgloss.NewStyle().BorderStyle(lipgloss.RoundedBorder()).
-	BorderForeground(lipgloss.Color("228")).
-	BorderBackground(lipgloss.Color("63")).
-	BorderTop(true).
-	BorderLeft(true)
+var TableText1 = lipgloss.NewStyle().
+	Align(lipgloss.Left).
+	PaddingLeft(1).
+	PaddingBottom(1).
+	BorderStyle(lipgloss.HiddenBorder()).
+	BorderBackground(lipgloss.Color("#FF5E5B"))

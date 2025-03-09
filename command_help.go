@@ -12,8 +12,7 @@ import (
 func commandHelp(cfg *config, args ...string) error {
 	fmt.Println()
 	fmt.Println(styles.Header.Render("Welcome to Palantír!"))
-	fmt.Println()
-	fmt.Println(styles.SubHeader.Render("The unofficial LOTR companion app."))
+	fmt.Println(styles.SubHeader.Render("The unofficial LOTR companion app"))
 
 	commands := getCommands()
 
@@ -25,16 +24,16 @@ func commandHelp(cfg *config, args ...string) error {
 	sort.Strings(commandNames)
 
 	t := table.New().
-		Border(lipgloss.NormalBorder()).
-		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("#FF5E5B"))).
+		Border(lipgloss.RoundedBorder()).
+		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("238"))).
 		StyleFunc(func(row, col int) lipgloss.Style {
 			switch {
 			case row == table.HeaderRow:
-				return styles.TableHeader
+				return styles.HeaderStyle
 			case row%2 == 0:
-				return styles.TableText
+				return styles.EvenRowStyle
 			default:
-				return styles.TableText
+				return styles.OddRowStyle
 			}
 		}).
 		Headers("Command", "Description")
@@ -44,6 +43,14 @@ func commandHelp(cfg *config, args ...string) error {
 		t.Row(cmd.name, cmd.description)
 	}
 	fmt.Println(t)
+
+	// fmt.Printf("%-20s %s\n", "Command", "Description")
+	// fmt.Println("-------------------- ------------------------------------------")
+
+	// for _, name := range commandNames {
+	// 	cmd := commands[name]
+	// 	fmt.Printf("%-20s %s\n", cmd.name, cmd.description)
+	// }
 
 	fmt.Println()
 	return nil
