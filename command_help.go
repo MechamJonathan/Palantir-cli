@@ -24,14 +24,6 @@ func commandHelp(cfg *config, args ...string) error {
 
 	sort.Strings(commandNames)
 
-	// fmt.Printf("%-20s %s\n", "Command", "Description")
-	// fmt.Println("-------------------- ------------------------------------------")
-
-	// for _, name := range commandNames {
-	// 	cmd := commands[name]
-	// 	fmt.Printf("%-20s %s\n", cmd.name, cmd.description)
-	// }
-
 	t := table.New().
 		Border(lipgloss.NormalBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("#FF5E5B"))).
