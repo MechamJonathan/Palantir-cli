@@ -11,7 +11,8 @@ var Header = lipgloss.NewStyle().
 	PaddingTop(2).
 	PaddingRight(4).
 	PaddingBottom(1).
-	PaddingLeft(4)
+	PaddingLeft(4).
+	Foreground(Yellow)
 
 var SubHeader = lipgloss.NewStyle().
 	Align(lipgloss.Center).
