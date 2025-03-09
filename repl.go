@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
+	"github.com/MechamJonathan/lotr-companion-app/styles"
 )
 
 type config struct {
@@ -31,7 +32,9 @@ func startRepl(cfg *config) {
 	cfg.currentQuotePage = 0
 
 	for {
-		fmt.Print("Palantír > ")
+		fmt.Print(styles.PalitirStyle.Render("Palantír"),
+			styles.ArrowSymbol.Render(" > "))
+
 		reader.Scan()
 
 		words := cleanInput(reader.Text())

@@ -12,6 +12,7 @@ import (
 func commandHelp(cfg *config, args ...string) error {
 	fmt.Println()
 	fmt.Println(styles.Header.Render("Welcome to Palantír!"))
+	fmt.Println(lipgloss.NewStyle().SetString(",---.\n<(  0  )>\n`---'").Align(lipgloss.Center).Width(70).Foreground(styles.Orange))
 	fmt.Println(styles.SubHeader.Render("The unofficial LOTR companion app"))
 
 	commands := getCommands()
