@@ -1,6 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/MechamJonathan/lotr-companion-app/styles"
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/lipgloss/table"
+)
 
 func commandGetMovies(cfg *config, args ...string) error {
 	movieResp, err := cfg.theoneapiClient.ListMovies()
@@ -8,10 +14,31 @@ func commandGetMovies(cfg *config, args ...string) error {
 		return err
 	}
 
-	printHeader("Movies")
+	// printHeader("Movies")
+	// for _, movie := range movieResp.Docs {
+	// 	fmt.Println(" -", movie.Name)
+	// }
+
+	t := table.New().
+		Border(lipgloss.RoundedBorder()).
+		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
+		StyleFunc(func(row, col int) lipgloss.Style {
+			switch {
+			case row == table.HeaderRow:
+				return styles.HeaderStyle
+			case row%2 == 0:
+				return styles.EvenRowStyle
+			default:
+				return styles.OddRowStyle
+			}
+		}).
+		Headers("Movies").Width(72)
 	for _, movie := range movieResp.Docs {
-		fmt.Println(" -", movie.Name)
+		t.Row(movie.Name)
 	}
+
+	fmt.Println("")
+	fmt.Println(t)
 	fmt.Println("")
 	return nil
 }

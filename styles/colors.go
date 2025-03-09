@@ -8,6 +8,6 @@ var (
 	LightGray      = lipgloss.Color("239")
 	Orange         = lipgloss.Color("#FF4500")
 	Red            = lipgloss.Color("#B22222")
-	Yellow         = lipgloss.Color("#8B6F5A")
+	Yellow         = lipgloss.Color("#D7B740")
 	SubHeaderColor = lipgloss.Color("#8B6F5A")
 )

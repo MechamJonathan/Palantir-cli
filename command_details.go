@@ -63,6 +63,5 @@ func fetchCharacterDetails(cfg *config, name string) error {
 	printHeader("Character Details")
 	fmt.Printf(" - Name: %s\n - ID: %s\n - WikiURL: %s\n - Race: %s\n - Birth: %s\n - Gender: %s\n - Death: %s\n - Hair: %s\n - Height: %s\n - Realm: %s\n - Spouse: %s\n\n",
 		charResp.Name, charResp.ID, charResp.WikiURL, charResp.Race, charResp.Birth, charResp.Gender, charResp.Death, charResp.Hair, charResp.Height, charResp.Realm, charResp.Spouse)
-
 	return nil
 }
