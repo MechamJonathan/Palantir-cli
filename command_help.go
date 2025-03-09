@@ -7,7 +7,8 @@ import (
 
 func commandHelp(cfg *config, args ...string) error {
 	fmt.Println()
-	fmt.Println("Welcome to the LOTR Companion App!")
+	fmt.Println("Welcome to Palantír! The unofficial LOTR companion app.")
+	fmt.Println()
 	fmt.Println("Usage:")
 	fmt.Println()
 

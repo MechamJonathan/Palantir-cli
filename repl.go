@@ -31,7 +31,7 @@ func startRepl(cfg *config) {
 	cfg.currentQuotePage = 0
 
 	for {
-		fmt.Print("Lotr-Companion-App > ")
+		fmt.Print("Palantír > ")
 		reader.Scan()
 
 		words := cleanInput(reader.Text())
