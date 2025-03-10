@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 
 	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
@@ -12,8 +11,21 @@ import (
 
 func commandGetCharacters(cfg *config, args ...string) error {
 	if len(args) < 1 {
-		return errors.New("usage: characters <all> | <fellowship> | <hobbits> | <men> | " +
-			"<elves> | <dwarves> | <orcs> | <wizards> | <creatures>")
+		cmdUsage := "usage: characters <group>"
+		cmdOptions := [][]string{
+			{"all", "All characters"},
+			{"fellowship", "Members of the Fellowship of the Ring"},
+			{"hobbits", "Popular Hobbits"},
+			{"men", "Popular Men (and Women) of Middle-earth "},
+			{"elves", "Popular Elves"},
+			{"dwarves", "Popular Dwarves"},
+			{"orcs", "Popular Orcs and Goblins"},
+			{"wizards", "The Istari (wizards)"},
+			{"creatures", "Other creatures and beasts"},
+		}
+
+		PrintUsageTable(cmdUsage, cmdOptions)
+		return nil
 	}
 
 	charResp, err := cfg.theoneapiClient.ListCharacters()
@@ -119,7 +131,6 @@ func getCreatures(characters []theoneapi.Character) {
 }
 
 func printGroupMembersTable(title string, groupMembers []string, characters []theoneapi.Character) {
-
 	clearScreen()
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).

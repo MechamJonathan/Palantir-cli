@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -13,7 +12,15 @@ import (
 
 func commandGetDetails(cfg *config, args ...string) error {
 	if len(args) < 1 {
-		return errors.New("usage: details <character name>|<movie>|<book>")
+		cmdUsage := "usage: details <option>"
+		cmdOptions := [][]string{
+			{"character name", "retrieve a specific character's details"},
+			{"movie", "retreive a movie's details or a movie series' details"},
+			{"book", "retreive a book's details"},
+		}
+
+		PrintUsageTable(cmdUsage, cmdOptions)
+		return nil
 	}
 
 	inputName := strings.Join(args, " ")

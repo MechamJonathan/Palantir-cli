@@ -24,6 +24,8 @@ func cleanInput(text string) []string {
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
+	clearScreen()
+	MoveCursorToBottom()
 	cfg.currentQuotePage = 0
 
 	for {

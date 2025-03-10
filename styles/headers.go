@@ -4,7 +4,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-var Header = lipgloss.NewStyle().
+var Title = lipgloss.NewStyle().
 	Bold(true).
 	Width(70).
 	Align(lipgloss.Center).
