@@ -14,12 +14,7 @@ func commandGetBooks(cfg *config, args ...string) error {
 	if err != nil {
 		return err
 	}
-
-	if err := clearScreen(); err != nil {
-		fmt.Printf("Error: %v\n", err)
-	}
 	printBooksTable(booksResp)
-	MoveCursorToBottom()
 	return nil
 }
 

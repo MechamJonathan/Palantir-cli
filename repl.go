@@ -12,7 +12,8 @@ import (
 	"github.com/MechamJonathan/lotr-companion-app/styles"
 )
 
-var startUpQuotes = []string{"“...Tʜᴇʏ ᴀʀᴇ ɴᴏᴛ ᴀʟʟ ᴀᴄᴄᴏᴜɴᴛᴇᴅ ғᴏʀ, ᴛʜᴇ ʟᴏsᴛ Sᴇᴇɪɴɢ Sᴛᴏɴᴇs. Wᴇ ᴅᴏ ɴᴏᴛ ᴋɴᴏᴡ ᴡʜᴏ ᴇʟsᴇ ᴍᴀʏ ʙᴇ ᴡᴀᴛᴄʜɪɴɢ”",
+var startUpQuotes = []string{
+	"“...Tʜᴇʏ ᴀʀᴇ ɴᴏᴛ ᴀʟʟ ᴀᴄᴄᴏᴜɴᴛᴇᴅ ғᴏʀ, ᴛʜᴇ ʟᴏsᴛ Sᴇᴇɪɴɢ Sᴛᴏɴᴇs. Wᴇ ᴅᴏ ɴᴏᴛ ᴋɴᴏᴡ ᴡʜᴏ ᴇʟsᴇ ᴍᴀʏ ʙᴇ ᴡᴀᴛᴄʜɪɴɢ”",
 	"“𝘈 𝘗𝘢𝘭𝘢𝘯𝘵𝘪́𝘳 𝘪𝘴 𝘢 𝘥𝘢𝘯𝘨𝘦𝘳𝘰𝘶𝘴 𝘵𝘰𝘰𝘭, 𝘚𝘢𝘳𝘶𝘮𝘢𝘯...\n\n   ...𝘞𝘩𝘺? 𝘞𝘩𝘺 𝘴𝘩𝘰𝘶𝘭𝘥 𝘸𝘦 𝘧𝘦𝘢𝘳 𝘵𝘰 𝘶𝘴𝘦 𝘪𝘵?”",
 	"“𝐴𝑙𝑎𝑠! 𝑇ℎ𝑎𝑡 𝑡ℎ𝑖𝑛𝑔 𝑖𝑠 𝑏𝑒𝑦𝑜𝑛𝑑 𝑎𝑙𝑙 𝑜𝑓 𝑢𝑠 𝑒𝑥𝑐𝑒𝑝𝑡 𝑝𝑒𝑟ℎ𝑎𝑝𝑠 𝐴𝑟𝑎𝑔𝑜𝑟𝑛. 𝐷𝑖𝑑 𝐼 𝑛𝑜𝑡 𝑡𝑒𝑙𝑙 𝑦𝑜𝑢, 𝑃𝑒𝑟𝑒𝑔𝑟𝑖𝑛 𝑇𝑜𝑜𝑘, 𝑛𝑒𝑣𝑒𝑟 𝑡𝑜 ℎ𝑎𝑛𝑑𝑙𝑒 𝑖𝑡?”"}
 
@@ -28,21 +29,15 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func randomStartupQuote(quotes []string) (string, error) {
-	randomInt, err := generateRandomInt(len(quotes))
+func getRandomQuote() string {
+	var index uint32
+	err := binary.Read(rand.Reader, binary.BigEndian, &index)
 	if err != nil {
-		return "", err
+		fmt.Println("Error generating random number:", err)
+		return ""
 	}
-	return quotes[randomInt], nil
-}
 
-func generateRandomInt(max int) (uint64, error) {
-	var num uint64
-	err := binary.Read(rand.Reader, binary.BigEndian, &num)
-	if err != nil {
-		return 0, err
-	}
-	return num % uint64(max), nil
+	return startUpQuotes[int(index)%len(startUpQuotes)]
 }
 
 func startRepl(cfg *config) {
@@ -50,7 +45,7 @@ func startRepl(cfg *config) {
 	if err := clearScreen(); err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
-	quote, _ := randomStartupQuote(startUpQuotes)
+	quote := getRandomQuote()
 	fmt.Println(styles.SubHeader.Render(quote))
 	MoveCursorToBottom()
 	cfg.currentQuotePage = 0
@@ -74,16 +69,20 @@ func startRepl(cfg *config) {
 
 		command, exists := getCommands()[commandName]
 		if exists {
+			if err := clearScreen(); err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
 			err := command.callback(cfg, args...)
 			if err != nil {
 				fmt.Println(err)
 			}
+			MoveCursorToBottom()
 			continue
 		} else {
 			if err := clearScreen(); err != nil {
 				fmt.Printf("Error: %v\n", err)
 			}
-			fmt.Println(styles.ErrorMessage.Render("Unkown command"))
+			fmt.Println("Unkown command")
 			MoveCursorToBottom()
 			continue
 		}
