@@ -25,12 +25,12 @@ func commandHelp(cfg *config, args ...string) error {
 
 	sort.Strings(commandNames)
 
-	printHelpTable(commandNames, commands)
+	printCommandHelpTable(commandNames, commands)
 	MoveCursorToBottom()
 	return nil
 }
 
-func printHelpTable(commandNames []string, commands map[string]cliCommand) {
+func printCommandHelpTable(commandNames []string, commands map[string]cliCommand) {
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
