@@ -1,6 +1,6 @@
 # Palintir CLI
 <p align="center">
-  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/Palantir-logo.png" width="350" title="logo">
+  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/Palantir-logo.png" width="900" title="logo">
 </p>
 
 ![badge](https://github.com/MechamJonathan/lotr-companion-app/actions/workflows/ci.yml/badge.svg?event=pull_request)
@@ -37,7 +37,7 @@ API_KEY = "{Your Access Token}"
 Build the application and then run the executable:
 ```
 go build
-./lotr-companion-app
+go run .
 ```
 # Commands
 
