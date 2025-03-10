@@ -53,7 +53,7 @@ func commandGetCharacters(cfg *config, args ...string) error {
 	case "creatures":
 		getCreatures(charResp.Docs)
 	default:
-		return fmt.Errorf("invalid argument '%s'", args[0])
+		return fmt.Errorf("invalid option: '%s'", args[0])
 	}
 
 	fmt.Println("")

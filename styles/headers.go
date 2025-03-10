@@ -20,4 +20,4 @@ var SubHeader = lipgloss.NewStyle().
 	PaddingBottom(1).
 	PaddingTop(1).
 	Align(lipgloss.Center).
-	Faint(true)
+	Faint(true).Bold(true)
