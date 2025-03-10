@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -17,7 +16,7 @@ func clearScreen() error {
 	cmd.Stdout = os.Stdout
 	err := cmd.Run()
 	if err != nil {
-		return errors.New("unable to clear screen")
+		return fmt.Errorf("unable to clear screen")
 	}
 	return nil
 }
