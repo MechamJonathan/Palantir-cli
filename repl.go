@@ -2,8 +2,9 @@ package main
 
 import (
 	"bufio"
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
-	"math/rand"
 	"os"
 	"strings"
 
@@ -28,8 +29,20 @@ func cleanInput(text string) []string {
 }
 
 func randomStartupQuote(quotes []string) (string, error) {
-	randomIndex := rand.Intn(len(quotes))
-	return quotes[randomIndex], nil
+	randomInt, err := generateRandomInt(len(quotes))
+	if err != nil {
+		return "", err
+	}
+	return quotes[randomInt], nil
+}
+
+func generateRandomInt(max int) (uint64, error) {
+	var num uint64
+	err := binary.Read(rand.Reader, binary.BigEndian, &num)
+	if err != nil {
+		return 0, err
+	}
+	return num % uint64(max), nil
 }
 
 func startRepl(cfg *config) {
