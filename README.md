@@ -1,4 +1,4 @@
-# Lotr-Companion-App CLI
+# Palintir CLI
 <p align="center">
   <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/logo.jpg" width="350" title="logo">
 </p>
