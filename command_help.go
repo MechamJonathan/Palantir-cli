@@ -11,7 +11,7 @@ import (
 
 func commandHelp(cfg *config, args ...string) error {
 	fmt.Println()
-	fmt.Println(styles.Header.Render("Welcome to Palantír!"))
+	fmt.Println(styles.Title.Render("Welcome to Palantír!"))
 	fmt.Println(lipgloss.NewStyle().SetString(",---.\n<(  0  )>\n`---'").Align(lipgloss.Center).Width(70).Foreground(styles.Orange))
 	fmt.Println(styles.SubHeader.Render("The unofficial LOTR companion app"))
 
@@ -24,6 +24,11 @@ func commandHelp(cfg *config, args ...string) error {
 
 	sort.Strings(commandNames)
 
+	printCommandHelpTable(commandNames, commands)
+	return nil
+}
+
+func printCommandHelpTable(commandNames []string, commands map[string]cliCommand) {
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
@@ -44,15 +49,5 @@ func commandHelp(cfg *config, args ...string) error {
 		t.Row(cmd.name, cmd.description)
 	}
 	fmt.Println(t)
-
-	// fmt.Printf("%-20s %s\n", "Command", "Description")
-	// fmt.Println("-------------------- ------------------------------------------")
-
-	// for _, name := range commandNames {
-	// 	cmd := commands[name]
-	// 	fmt.Printf("%-20s %s\n", cmd.name, cmd.description)
-	// }
-
 	fmt.Println()
-	return nil
 }

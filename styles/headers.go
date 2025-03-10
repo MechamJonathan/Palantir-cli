@@ -4,7 +4,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-var Header = lipgloss.NewStyle().
+var Title = lipgloss.NewStyle().
 	Bold(true).
 	Width(70).
 	Align(lipgloss.Center).
@@ -21,3 +21,10 @@ var SubHeader = lipgloss.NewStyle().
 	PaddingTop(1).
 	Align(lipgloss.Center).
 	Faint(true)
+
+var StartUpQuote = lipgloss.NewStyle().
+	Align(lipgloss.Center).
+	Width(70).
+	Margin(10, 2, 10, 2).
+	Align(lipgloss.Center).
+	Faint(true).Bold(true)

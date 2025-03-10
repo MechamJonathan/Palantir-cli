@@ -2,6 +2,8 @@ package main
 
 import (
 	"bufio"
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
 	"os"
 	"strings"
@@ -9,6 +11,11 @@ import (
 	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
 	"github.com/MechamJonathan/lotr-companion-app/styles"
 )
+
+var startUpQuotes = []string{
+	"“...Tʜᴇʏ ᴀʀᴇ ɴᴏᴛ ᴀʟʟ ᴀᴄᴄᴏᴜɴᴛᴇᴅ ғᴏʀ, ᴛʜᴇ ʟᴏsᴛ Sᴇᴇɪɴɢ Sᴛᴏɴᴇs.\n\n	Wᴇ ᴅᴏ ɴᴏᴛ ᴋɴᴏᴡ ᴡʜᴏ ᴇʟsᴇ ᴍᴀʏ ʙᴇ ᴡᴀᴛᴄʜɪɴɢ...”",
+	"“A Pᴀʟᴀɴᴛɪ́ʀ ɪs ᴀ ᴅᴀɴɢᴇʀᴏᴜs ᴛᴏᴏʟ, Sᴀʀᴜᴍᴀɴ...\n\n	...Wʜʏ? Wʜʏ sʜᴏᴜʟᴅ ᴡᴇ ғᴇᴀʀ ᴛᴏ ᴜsᴇ ɪᴛ”",
+	"“Dɪᴅ I ɴᴏᴛ ᴛᴇʟʟ ʏᴏᴜ, Pᴇʀᴇɢʀɪɴ Tᴏᴏᴋ, ɴᴇᴠᴇʀ ᴛᴏ ʜᴀɴᴅʟᴇ ɪᴛ?”"}
 
 type config struct {
 	theoneapiClient      theoneapi.Client
@@ -22,13 +29,25 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func printHeader(title string) {
-	fmt.Printf("\n%-20s\n", title)
-	fmt.Println("--------------------")
+func getRandomQuote() string {
+	var index uint32
+	err := binary.Read(rand.Reader, binary.BigEndian, &index)
+	if err != nil {
+		fmt.Println("Error generating random number:", err)
+		return ""
+	}
+
+	return startUpQuotes[int(index)%len(startUpQuotes)]
 }
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
+	if err := ClearScreen(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
+	quote := getRandomQuote()
+	fmt.Println(styles.StartUpQuote.Render(quote))
+	MoveCursorToBottom()
 	cfg.currentQuotePage = 0
 
 	for {
@@ -50,13 +69,21 @@ func startRepl(cfg *config) {
 
 		command, exists := getCommands()[commandName]
 		if exists {
+			if err := ClearScreen(); err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
 			err := command.callback(cfg, args...)
 			if err != nil {
 				fmt.Println(err)
 			}
+			MoveCursorToBottom()
 			continue
 		} else {
+			if err := ClearScreen(); err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
 			fmt.Println("Unkown command")
+			MoveCursorToBottom()
 			continue
 		}
 	}

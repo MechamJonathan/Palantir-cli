@@ -3,10 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/MechamJonathan/lotr-companion-app/styles"
 )
 
 func commandExit(cfg *config, args ...string) error {
-	fmt.Println("Closing Lotr-Companion-App... Goodbye!")
+	fmt.Println(styles.StartUpQuote.Render("Closing Palantír... Namárië!"))
+	MoveCursorToBottom()
 	os.Exit(0)
 	return nil
 }
