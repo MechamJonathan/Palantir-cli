@@ -60,7 +60,7 @@ func fetchMovieDetails(cfg *config, name string) error {
 	}
 
 	movieTableName := movieResp.Name + " (movie)"
-	printTable(rows, movieTableName)
+	printDetailsTable(rows, movieTableName)
 	return nil
 }
 
@@ -79,7 +79,7 @@ func fetchBookDetails(cfg *config, name string) error {
 	}
 
 	bookTableName := bookResp.Name + " (book)"
-	printTable(rows, bookTableName)
+	printDetailsTable(rows, bookTableName)
 	return nil
 }
 
@@ -106,11 +106,11 @@ func fetchCharacterDetails(cfg *config, name string) error {
 		{"Spouse", charResp.Spouse},
 	}
 
-	printTable(rows, charResp.Name)
+	printDetailsTable(rows, charResp.Name)
 	return nil
 }
 
-func printTable(rows [][]string, name string) {
+func printDetailsTable(rows [][]string, name string) {
 
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).

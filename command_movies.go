@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
 	"github.com/MechamJonathan/lotr-companion-app/styles"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
@@ -13,12 +14,11 @@ func commandGetMovies(cfg *config, args ...string) error {
 	if err != nil {
 		return err
 	}
+	printMoviesTable(movieResp)
+	return nil
+}
 
-	// printHeader("Movies")
-	// for _, movie := range movieResp.Docs {
-	// 	fmt.Println(" -", movie.Name)
-	// }
-
+func printMoviesTable(mr theoneapi.MovieResponse) {
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
@@ -33,12 +33,11 @@ func commandGetMovies(cfg *config, args ...string) error {
 			}
 		}).
 		Headers("Movies").Width(72)
-	for _, movie := range movieResp.Docs {
+	for _, movie := range mr.Docs {
 		t.Row(movie.Name)
 	}
 
 	fmt.Println("")
 	fmt.Println(t)
 	fmt.Println("")
-	return nil
 }

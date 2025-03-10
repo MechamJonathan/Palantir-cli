@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
 	"github.com/MechamJonathan/lotr-companion-app/styles"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
@@ -13,6 +14,12 @@ func commandGetBooks(cfg *config, args ...string) error {
 	if err != nil {
 		return err
 	}
+
+	printBooksTable(booksResp)
+	return nil
+}
+
+func printBooksTable(br theoneapi.BooksResponse) {
 
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
@@ -28,17 +35,10 @@ func commandGetBooks(cfg *config, args ...string) error {
 			}
 		}).
 		Headers("Books").Width(72)
-	for _, book := range booksResp.Docs {
+	for _, book := range br.Docs {
 		t.Row(book.Name)
 	}
 	fmt.Println("")
 	fmt.Println(t)
-
-	// fmt.Printf("\n%-20s\n", "Books")
-	// fmt.Println("--------------------")
-	// for _, book := range booksResp.Docs {
-	// 	fmt.Println(" -", book.Name)
-	// }
 	fmt.Println("")
-	return nil
 }
