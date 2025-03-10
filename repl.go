@@ -27,15 +27,16 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func randomStartupQuote(quotes []string) string {
+func randomStartupQuote(quotes []string) (string, error) {
 	randomIndex := rand.Intn(len(quotes))
-	return quotes[randomIndex]
+	return quotes[randomIndex], nil
 }
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 	clearScreen()
-	fmt.Println(styles.SubHeader.Render(randomStartupQuote(startUpQuotes)))
+	quote, _ := randomStartupQuote(startUpQuotes)
+	fmt.Println(styles.SubHeader.Render(quote))
 	MoveCursorToBottom()
 	cfg.currentQuotePage = 0
 
