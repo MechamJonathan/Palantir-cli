@@ -9,7 +9,7 @@ import (
 
 func commandExit(cfg *config, args ...string) error {
 	clearScreen()
-	fmt.Println(styles.SubHeader.Render("Closing Lotr-Companion-App... Goodbye!"))
+	fmt.Println(styles.SubHeader.Render("Closing Palantír... Namárië!"))
 	MoveCursorToBottom()
 	os.Exit(0)
 	return nil

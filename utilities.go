@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -11,10 +12,14 @@ import (
 	"golang.org/x/term"
 )
 
-func clearScreen() {
+func clearScreen() error {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
-	cmd.Run()
+	err := cmd.Run()
+	if err != nil {
+		return errors.New("unable to clear screen")
+	}
+	return nil
 }
 
 func MoveCursorToBottom() {
