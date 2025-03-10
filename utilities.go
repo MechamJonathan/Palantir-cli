@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
 	"os"
 	"os/exec"
@@ -32,6 +34,17 @@ func GetTerminalHeight() int {
 		return 20
 	}
 	return height
+}
+
+func getRandomQuote(quotes []string) string {
+	var index uint32
+	err := binary.Read(rand.Reader, binary.BigEndian, &index)
+	if err != nil {
+		fmt.Println("Error generating random number:", err)
+		return ""
+	}
+
+	return quotes[int(index)%len(quotes)]
 }
 
 func PrintUsageTable(cmdUsage string, options [][]string) {

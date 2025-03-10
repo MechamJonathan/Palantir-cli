@@ -2,8 +2,6 @@ package main
 
 import (
 	"bufio"
-	"crypto/rand"
-	"encoding/binary"
 	"fmt"
 	"os"
 	"strings"
@@ -29,23 +27,12 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func getRandomQuote() string {
-	var index uint32
-	err := binary.Read(rand.Reader, binary.BigEndian, &index)
-	if err != nil {
-		fmt.Println("Error generating random number:", err)
-		return ""
-	}
-
-	return startUpQuotes[int(index)%len(startUpQuotes)]
-}
-
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 	if err := ClearScreen(); err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
-	quote := getRandomQuote()
+	quote := getRandomQuote(startUpQuotes)
 	fmt.Println(styles.StartUpQuote.Render(quote))
 	MoveCursorToBottom()
 	cfg.currentQuotePage = 0
