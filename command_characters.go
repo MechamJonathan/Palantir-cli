@@ -5,6 +5,9 @@ import (
 	"fmt"
 
 	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
+	"github.com/MechamJonathan/lotr-companion-app/styles"
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/lipgloss/table"
 )
 
 func commandGetCharacters(cfg *config, args ...string) error {
@@ -46,10 +49,12 @@ func commandGetCharacters(cfg *config, args ...string) error {
 }
 
 func printAllCharacters(characters []theoneapi.Character) {
-	printHeader("All Characters")
+	var allCharacters []string
 	for _, character := range characters {
-		fmt.Println(" -", character.Name)
+		allCharacters = append(allCharacters, character.Name)
 	}
+
+	printGroupMembers("All Characters", allCharacters, characters)
 }
 
 func getFellowshipMembers(characters []theoneapi.Character) {
@@ -113,13 +118,32 @@ func getCreatures(characters []theoneapi.Character) {
 }
 
 func printGroupMembers(title string, groupMembers []string, characters []theoneapi.Character) {
-	printHeader(title)
+
+	t := table.New().
+		Border(lipgloss.RoundedBorder()).
+		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
+		StyleFunc(func(row, col int) lipgloss.Style {
+			switch {
+			case row == table.HeaderRow:
+				return styles.HeaderStyle
+			case row%2 == 0:
+				return styles.EvenRowStyle
+			default:
+				return styles.OddRowStyle
+			}
+		}).
+		Headers(title).
+		Width(72)
+
 	for _, character := range characters {
 		for _, member := range groupMembers {
 			if character.Name == member {
-				fmt.Println(" -", character.Name)
-				break
+				t.Row(character.Name)
 			}
 		}
 	}
+
+	fmt.Println("")
+	fmt.Println(t)
+	fmt.Println("")
 }
