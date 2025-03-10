@@ -6,6 +6,10 @@ import (
 	"strings"
 
 	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
+	"github.com/MechamJonathan/lotr-companion-app/styles"
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/lipgloss/table"
+	"github.com/muesli/reflow/wordwrap"
 )
 
 func commandQuotesf(cfg *config, args ...string) error {
@@ -33,7 +37,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 		return err
 	}
 
-	printQuotes(quotesResp.Docs)
+	printQuotesTable(cfg.currentQuotePage, quotesResp.Docs, cfg.currentCharacterName)
 
 	return nil
 }
@@ -50,16 +54,31 @@ func commandQuotesb(cfg *config, args ...string) error {
 		return err
 	}
 
-	printQuotes(quotesResp.Docs)
+	printQuotesTable(cfg.currentQuotePage, quotesResp.Docs, cfg.currentCharacterName)
 
 	return nil
 }
 
-func printQuotes(quotes []theoneapi.Quote) {
+func printQuotesTable(page int, quotes []theoneapi.Quote, characterName string) {
+	headerString := fmt.Sprintf("Page: %v of %s Quotes", page, characterName)
+	t := table.New().
+		Border(lipgloss.RoundedBorder()).
+		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
+		StyleFunc(func(row, col int) lipgloss.Style {
+			switch {
+			case row == table.HeaderRow:
+				return styles.HeaderStyle
+			case row%2 == 0:
+				return styles.QuoteStyle
+			default:
+				return styles.OddQuoteStyle
+			}
+		}).
+		Headers(headerString).Width(72)
 	for _, quote := range quotes {
-		fmt.Printf("------------------------------------------\n")
-		fmt.Printf("\"%s\"\n", quote.Dialog)
-		fmt.Printf("- %s\n", quote.CharacterName)
-		fmt.Printf("------------------------------------------\n\n")
+		wrappedText := wordwrap.String(quote.Dialog, 60)
+		t.Row(wrappedText)
 	}
+
+	fmt.Println(t)
 }
