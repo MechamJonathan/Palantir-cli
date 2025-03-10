@@ -15,12 +15,13 @@ func commandGetBooks(cfg *config, args ...string) error {
 		return err
 	}
 
+	clearScreen()
 	printBooksTable(booksResp)
+	MoveCursorToBottom()
 	return nil
 }
 
 func printBooksTable(br theoneapi.BooksResponse) {
-
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).

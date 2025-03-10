@@ -22,11 +22,6 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func printHeader(title string) {
-	fmt.Printf("\n%-20s\n", title)
-	fmt.Println("--------------------")
-}
-
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 	cfg.currentQuotePage = 0

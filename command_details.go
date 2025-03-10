@@ -24,7 +24,7 @@ func commandGetDetails(cfg *config, args ...string) error {
 	}
 
 	movieErr := fetchMovieDetails(cfg, inputName)
-	bookErr := fetchBookDetails(cfg, inputName)
+	_, _, bookErr := fetchBookDetails(cfg, inputName)
 	if movieErr == nil || bookErr == nil {
 		return nil
 	}
@@ -37,12 +37,6 @@ func fetchMovieDetails(cfg *config, name string) error {
 	if err != nil {
 		return err
 	}
-
-	// printHeader("Movie Details")
-	// fmt.Printf(" - Name: %s\n - ID: %s\n - Runtime: %d min\n - Budget: $%.2fM\n - Box Office: $%.2fM\n - Awards: %d nominations, %d wins\n - Rotten Tomatoes: %.1f%%\n\n",
-	// 	movieResp.Name, movieResp.ID, movieResp.RuntimeInMinutes, movieResp.BudgetInMillions,
-	// 	movieResp.BoxOfficeRevenueInMillions, movieResp.AcademyAwardNominations, movieResp.AcademyAwardWins,
-	// 	movieResp.RottenTomatoesScore)
 
 	runtime := fmt.Sprint(movieResp.RuntimeInMinutes)
 	budget := strconv.FormatFloat(movieResp.BudgetInMillions, 'f', -1, 64)
@@ -60,18 +54,20 @@ func fetchMovieDetails(cfg *config, name string) error {
 	}
 
 	movieTableName := movieResp.Name + " (movie)"
-	printDetailsTable(rows, movieTableName)
+	bookRows, bookTableName, _ := fetchBookDetails(cfg, name)
+	if bookRows != nil {
+		printMoviesAndBooksDetailsTables(rows, movieTableName, bookRows, bookTableName)
+	} else {
+		printMoviesAndBooksDetailsTables(rows, movieTableName, nil, "")
+	}
 	return nil
 }
 
-func fetchBookDetails(cfg *config, name string) error {
+func fetchBookDetails(cfg *config, name string) ([][]string, string, error) {
 	bookResp, err := cfg.theoneapiClient.GetBookByName(name)
 	if err != nil {
-		return err
+		return nil, "", err
 	}
-
-	// printHeader("Book Details")
-	// fmt.Printf(" - Name: %s\n - No additional details available currently\n\n", bookResp.Name)
 
 	rows := [][]string{
 		{"Name", bookResp.Name},
@@ -79,8 +75,7 @@ func fetchBookDetails(cfg *config, name string) error {
 	}
 
 	bookTableName := bookResp.Name + " (book)"
-	printDetailsTable(rows, bookTableName)
-	return nil
+	return rows, bookTableName, err
 }
 
 func fetchCharacterDetails(cfg *config, name string) error {
@@ -88,10 +83,6 @@ func fetchCharacterDetails(cfg *config, name string) error {
 	if err != nil {
 		return err
 	}
-
-	// printHeader("Character Details")
-	// fmt.Printf(" - Name: %s\n - ID: %s\n - WikiURL: %s\n - Race: %s\n - Birth: %s\n - Gender: %s\n - Death: %s\n - Hair: %s\n - Height: %s\n - Realm: %s\n - Spouse: %s\n\n",
-	// 	charResp.Name, charResp.ID, charResp.WikiURL, charResp.Race, charResp.Birth, charResp.Gender, charResp.Death, charResp.Hair, charResp.Height, charResp.Realm, charResp.Spouse)
 
 	rows := [][]string{
 		{"Name", charResp.Name},
@@ -106,12 +97,24 @@ func fetchCharacterDetails(cfg *config, name string) error {
 		{"Spouse", charResp.Spouse},
 	}
 
+	clearScreen()
 	printDetailsTable(rows, charResp.Name)
+	MoveCursorToBottom()
 	return nil
 }
 
-func printDetailsTable(rows [][]string, name string) {
+func printMoviesAndBooksDetailsTables(movieRows [][]string, movieTableTitle string, bookRows [][]string, bookTableTitle string) {
+	clearScreen()
+	if movieRows != nil {
+		printDetailsTable(movieRows, movieTableTitle)
+	}
+	if bookRows != nil {
+		printDetailsTable(bookRows, bookTableTitle)
+	}
+	MoveCursorToBottom()
+}
 
+func printDetailsTable(rows [][]string, name string) {
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).

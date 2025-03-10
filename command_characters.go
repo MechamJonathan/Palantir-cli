@@ -54,7 +54,7 @@ func printAllCharacters(characters []theoneapi.Character) {
 		allCharacters = append(allCharacters, character.Name)
 	}
 
-	printGroupMembers("All Characters", allCharacters, characters)
+	printGroupMembersTable("All Characters", allCharacters, characters)
 }
 
 func getFellowshipMembers(characters []theoneapi.Character) {
@@ -62,14 +62,14 @@ func getFellowshipMembers(characters []theoneapi.Character) {
 		"Frodo Baggins", "Samwise Gamgee", "Gandalf", "Aragorn II Elessar", "Legolas",
 		"Gimli", "Boromir", "Meriadoc Brandybuck", "Peregrin Took",
 	}
-	printGroupMembers("Fellowship Members", fellowshipMembers, characters)
+	printGroupMembersTable("Fellowship Members", fellowshipMembers, characters)
 }
 
 func getHobbitMembers(characters []theoneapi.Character) {
 	hobbitMembers := []string{
 		"Frodo Baggins", "Samwise Gamgee", "Meriadoc Brandybuck", "Peregrin Took", "Bilbo Baggins",
 	}
-	printGroupMembers("Hobbits", hobbitMembers, characters)
+	printGroupMembersTable("Hobbits", hobbitMembers, characters)
 }
 
 func getMenOfMiddleEarth(characters []theoneapi.Character) {
@@ -77,14 +77,14 @@ func getMenOfMiddleEarth(characters []theoneapi.Character) {
 		"Aragorn II Elessar", "Boromir", "Faramir", "Théoden", "Éomer", "Éowyn", "Denethor", "Bard",
 		"Gríma Wormtongue", "Denethor II",
 	}
-	printGroupMembers("Men of Middle Earth", menOfMiddleEarth, characters)
+	printGroupMembersTable("Men of Middle Earth", menOfMiddleEarth, characters)
 }
 
 func getElves(characters []theoneapi.Character) {
 	elves := []string{
 		"Legolas", "Elrond", "Galadriel", "Arwen", "Thranduil", "Glorfindel", "Haldir", "Celeborn",
 	}
-	printGroupMembers("Elves", elves, characters)
+	printGroupMembersTable("Elves", elves, characters)
 }
 
 func getDwarves(characters []theoneapi.Character) {
@@ -92,21 +92,21 @@ func getDwarves(characters []theoneapi.Character) {
 		"Gimli", "Thorin II Oakenshield", "Balin", "Dwalin", "Bofur", "Durin", "Dáin II Ironfoot",
 		"Fíli and Kíli", "Óin", "Glóin", "Bifur", "Bombur", "Dori", "Nori", "Ori",
 	}
-	printGroupMembers("Dwarves", dwarves, characters)
+	printGroupMembersTable("Dwarves", dwarves, characters)
 }
 
 func getWizards(characters []theoneapi.Character) {
 	wizards := []string{
 		"Gandalf", "Saruman", "Sauron", "Radagast", "Alatar", "Pallando",
 	}
-	printGroupMembers("Wizards", wizards, characters)
+	printGroupMembersTable("Wizards", wizards, characters)
 }
 
 func getOrcs(characters []theoneapi.Character) {
 	orcs := []string{
 		"Azog", "Bolg", "Gothmog", "Uglúk", "Grishnákh", "Shagrat", "Gorbag", "Snaga",
 	}
-	printGroupMembers("Orcs", orcs, characters)
+	printGroupMembersTable("Orcs", orcs, characters)
 }
 
 func getCreatures(characters []theoneapi.Character) {
@@ -114,11 +114,13 @@ func getCreatures(characters []theoneapi.Character) {
 		"Gollum", "Smaug", "Shelob", "Treebeard", "Watcher in the Water", "Gwaihir", "Durin's Bane", "Witch-King of Angmar",
 		"Khamûl",
 	}
-	printGroupMembers("Creatures", creatures, characters)
+	printGroupMembersTable("Creatures", creatures, characters)
+
 }
 
-func printGroupMembers(title string, groupMembers []string, characters []theoneapi.Character) {
+func printGroupMembersTable(title string, groupMembers []string, characters []theoneapi.Character) {
 
+	clearScreen()
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).
@@ -146,4 +148,5 @@ func printGroupMembers(title string, groupMembers []string, characters []theonea
 	fmt.Println("")
 	fmt.Println(t)
 	fmt.Println("")
+	MoveCursorToBottom()
 }

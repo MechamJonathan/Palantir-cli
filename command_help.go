@@ -10,6 +10,7 @@ import (
 )
 
 func commandHelp(cfg *config, args ...string) error {
+	clearScreen()
 	fmt.Println()
 	fmt.Println(styles.Header.Render("Welcome to Palantír!"))
 	fmt.Println(lipgloss.NewStyle().SetString(",---.\n<(  0  )>\n`---'").Align(lipgloss.Center).Width(70).Foreground(styles.Orange))
@@ -25,6 +26,7 @@ func commandHelp(cfg *config, args ...string) error {
 	sort.Strings(commandNames)
 
 	printHelpTable(commandNames, commands)
+	MoveCursorToBottom()
 	return nil
 }
 

@@ -14,7 +14,10 @@ func commandGetMovies(cfg *config, args ...string) error {
 	if err != nil {
 		return err
 	}
+
+	clearScreen()
 	printMoviesTable(movieResp)
+	MoveCursorToBottom()
 	return nil
 }
 
