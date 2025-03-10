@@ -13,9 +13,9 @@ import (
 )
 
 var startUpQuotes = []string{
-	"“...Tʜᴇʏ ᴀʀᴇ ɴᴏᴛ ᴀʟʟ ᴀᴄᴄᴏᴜɴᴛᴇᴅ ғᴏʀ, ᴛʜᴇ ʟᴏsᴛ Sᴇᴇɪɴɢ Sᴛᴏɴᴇs. Wᴇ ᴅᴏ ɴᴏᴛ ᴋɴᴏᴡ ᴡʜᴏ ᴇʟsᴇ ᴍᴀʏ ʙᴇ ᴡᴀᴛᴄʜɪɴɢ”",
-	"“𝘈 𝘗𝘢𝘭𝘢𝘯𝘵𝘪́𝘳 𝘪𝘴 𝘢 𝘥𝘢𝘯𝘨𝘦𝘳𝘰𝘶𝘴 𝘵𝘰𝘰𝘭, 𝘚𝘢𝘳𝘶𝘮𝘢𝘯...\n\n   ...𝘞𝘩𝘺? 𝘞𝘩𝘺 𝘴𝘩𝘰𝘶𝘭𝘥 𝘸𝘦 𝘧𝘦𝘢𝘳 𝘵𝘰 𝘶𝘴𝘦 𝘪𝘵?”",
-	"“𝐴𝑙𝑎𝑠! 𝑇ℎ𝑎𝑡 𝑡ℎ𝑖𝑛𝑔 𝑖𝑠 𝑏𝑒𝑦𝑜𝑛𝑑 𝑎𝑙𝑙 𝑜𝑓 𝑢𝑠 𝑒𝑥𝑐𝑒𝑝𝑡 𝑝𝑒𝑟ℎ𝑎𝑝𝑠 𝐴𝑟𝑎𝑔𝑜𝑟𝑛. 𝐷𝑖𝑑 𝐼 𝑛𝑜𝑡 𝑡𝑒𝑙𝑙 𝑦𝑜𝑢, 𝑃𝑒𝑟𝑒𝑔𝑟𝑖𝑛 𝑇𝑜𝑜𝑘, 𝑛𝑒𝑣𝑒𝑟 𝑡𝑜 ℎ𝑎𝑛𝑑𝑙𝑒 𝑖𝑡?”"}
+	"“...Tʜᴇʏ ᴀʀᴇ ɴᴏᴛ ᴀʟʟ ᴀᴄᴄᴏᴜɴᴛᴇᴅ ғᴏʀ, ᴛʜᴇ ʟᴏsᴛ Sᴇᴇɪɴɢ Sᴛᴏɴᴇs.\n\n	Wᴇ ᴅᴏ ɴᴏᴛ ᴋɴᴏᴡ ᴡʜᴏ ᴇʟsᴇ ᴍᴀʏ ʙᴇ ᴡᴀᴛᴄʜɪɴɢ...”",
+	"“A Pᴀʟᴀɴᴛɪ́ʀ ɪs ᴀ ᴅᴀɴɢᴇʀᴏᴜs ᴛᴏᴏʟ, Sᴀʀᴜᴍᴀɴ...\n\n	...Wʜʏ? Wʜʏ sʜᴏᴜʟᴅ ᴡᴇ ғᴇᴀʀ ᴛᴏ ᴜsᴇ ɪᴛ”",
+	"“Dɪᴅ I ɴᴏᴛ ᴛᴇʟʟ ʏᴏᴜ, Pᴇʀᴇɢʀɪɴ Tᴏᴏᴋ, ɴᴇᴠᴇʀ ᴛᴏ ʜᴀɴᴅʟᴇ ɪᴛ?”"}
 
 type config struct {
 	theoneapiClient      theoneapi.Client
@@ -42,11 +42,11 @@ func getRandomQuote() string {
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
-	if err := clearScreen(); err != nil {
+	if err := ClearScreen(); err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
 	quote := getRandomQuote()
-	fmt.Println(styles.SubHeader.Render(quote))
+	fmt.Println(styles.StartUpQuote.Render(quote))
 	MoveCursorToBottom()
 	cfg.currentQuotePage = 0
 
@@ -69,7 +69,7 @@ func startRepl(cfg *config) {
 
 		command, exists := getCommands()[commandName]
 		if exists {
-			if err := clearScreen(); err != nil {
+			if err := ClearScreen(); err != nil {
 				fmt.Printf("Error: %v\n", err)
 			}
 			err := command.callback(cfg, args...)
@@ -79,7 +79,7 @@ func startRepl(cfg *config) {
 			MoveCursorToBottom()
 			continue
 		} else {
-			if err := clearScreen(); err != nil {
+			if err := ClearScreen(); err != nil {
 				fmt.Printf("Error: %v\n", err)
 			}
 			fmt.Println("Unkown command")

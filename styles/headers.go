@@ -20,4 +20,11 @@ var SubHeader = lipgloss.NewStyle().
 	PaddingBottom(1).
 	PaddingTop(1).
 	Align(lipgloss.Center).
+	Faint(true)
+
+var StartUpQuote = lipgloss.NewStyle().
+	Align(lipgloss.Center).
+	Width(70).
+	Margin(10, 2, 10, 2).
+	Align(lipgloss.Center).
 	Faint(true).Bold(true)

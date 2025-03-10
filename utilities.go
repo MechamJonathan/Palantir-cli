@@ -11,7 +11,7 @@ import (
 	"golang.org/x/term"
 )
 
-func clearScreen() error {
+func ClearScreen() error {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	err := cmd.Run()
@@ -22,8 +22,8 @@ func clearScreen() error {
 }
 
 func MoveCursorToBottom() {
-	lines := GetTerminalHeight()
-	fmt.Printf("\033[%d;1H", lines)
+	th := GetTerminalHeight()
+	fmt.Printf("\033[%d;1H", th)
 }
 
 func GetTerminalHeight() int {
@@ -35,7 +35,7 @@ func GetTerminalHeight() int {
 }
 
 func PrintUsageTable(cmdUsage string, options [][]string) {
-	if err := clearScreen(); err != nil {
+	if err := ClearScreen(); err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
 	fmt.Println(styles.Title.Render(cmdUsage))
