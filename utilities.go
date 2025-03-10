@@ -35,7 +35,9 @@ func GetTerminalHeight() int {
 }
 
 func PrintUsageTable(cmdUsage string, options [][]string) {
-	clearScreen()
+	if err := clearScreen(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
 	fmt.Println(styles.Title.Render(cmdUsage))
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).

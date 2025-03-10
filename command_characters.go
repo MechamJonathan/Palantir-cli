@@ -131,7 +131,9 @@ func getCreatures(characters []theoneapi.Character) {
 }
 
 func printGroupMembersTable(title string, groupMembers []string, characters []theoneapi.Character) {
-	clearScreen()
+	if err := clearScreen(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
 	t := table.New().
 		Border(lipgloss.RoundedBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color(styles.Red))).

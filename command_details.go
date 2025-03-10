@@ -104,14 +104,18 @@ func fetchCharacterDetails(cfg *config, name string) error {
 		{"Spouse", charResp.Spouse},
 	}
 
-	clearScreen()
+	if err := clearScreen(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
 	printDetailsTable(rows, charResp.Name)
 	MoveCursorToBottom()
 	return nil
 }
 
 func printMoviesAndBooksDetailsTables(movieRows [][]string, movieTableTitle string, bookRows [][]string, bookTableTitle string) {
-	clearScreen()
+	if err := clearScreen(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
 	if movieRows != nil {
 		printDetailsTable(movieRows, movieTableTitle)
 	}

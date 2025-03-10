@@ -34,7 +34,9 @@ func randomStartupQuote(quotes []string) (string, error) {
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
-	clearScreen()
+	if err := clearScreen(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
 	quote, _ := randomStartupQuote(startUpQuotes)
 	fmt.Println(styles.SubHeader.Render(quote))
 	MoveCursorToBottom()
@@ -65,7 +67,9 @@ func startRepl(cfg *config) {
 			}
 			continue
 		} else {
-			clearScreen()
+			if err := clearScreen(); err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
 			fmt.Println(styles.ErrorMessage.Render("Unkown command"))
 			MoveCursorToBottom()
 			continue
