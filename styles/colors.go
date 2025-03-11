@@ -3,7 +3,6 @@ package styles
 import "github.com/charmbracelet/lipgloss"
 
 var (
-	MordorPurple   = lipgloss.Color("99")
 	Gray           = lipgloss.Color("245")
 	LightGray      = lipgloss.Color("239")
 	Orange         = lipgloss.Color("#FF4500")
