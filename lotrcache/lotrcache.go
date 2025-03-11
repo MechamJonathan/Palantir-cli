@@ -22,7 +22,6 @@ func NewCache(interval time.Duration) Cache {
 	}
 
 	go c.reapLoop(interval)
-
 	return c
 }
 

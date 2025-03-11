@@ -6,7 +6,6 @@ type Quote struct {
 	Movie         string `json:"movie"`
 	Character     string `json:"character"`
 	CharacterName string `json:"character_name,omitempty"` // New field for name
-
 }
 
 type QuoteResponse struct {
