@@ -18,7 +18,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 	inputName := strings.Join(args, " ")
 
 	if len(args) < 1 && cfg.currentCharacterName == "" {
-		cmdUsage := "usage: quotes <character name>"
+		cmdUsage := "usage: quotes <character name>\n"
 		cmdOptions := [][]string{
 			{"character name", "retrieve quotes from specific character"},
 		}
