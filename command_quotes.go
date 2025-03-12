@@ -23,14 +23,13 @@ func commandQuotesf(cfg *config, args ...string) error {
 			{"character name", "retrieve quotes from specific character"},
 		}
 		PrintUsageTable(cmdUsage, cmdOptions)
-		fmt.Println(quotesHelpMessage)
 		return nil
 
 	} else if cfg.currentCharacterName == "" {
 		cfg.currentCharacterName = inputName
 	} else if cfg.currentCharacterName != "" && len(args) >= 1 {
 		cfg.currentCharacterName = inputName
-		cfg.currentQuotePage = 1
+		cfg.currentQuotePage = 0
 	}
 
 	cfg.currentQuotePage += 1
@@ -47,6 +46,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 
 func commandQuotesb(cfg *config, args ...string) error {
 	if cfg.currentQuotePage <= 1 {
+		cfg.currentQuotePage -= 1
 		return errors.New("you're on the first page of quotes")
 	}
 
