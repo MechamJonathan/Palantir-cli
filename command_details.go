@@ -36,7 +36,6 @@ func commandGetDetails(cfg *config, args ...string) error {
 		return nil
 	}
 	return fmt.Errorf("no details found for: %s", inputName)
-
 }
 
 func fetchMovieDetails(cfg *config, name string) error {

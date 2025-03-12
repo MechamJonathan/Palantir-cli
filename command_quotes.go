@@ -12,11 +12,13 @@ import (
 	"github.com/muesli/reflow/wordwrap"
 )
 
+var quotesHelpMessage = styles.ErrorMessage.SetString("enter 'quotes' to go forward a page. 'quotesb' to go back a page.\n or enter 'quotes <character name>' to view another character's quotes.").Render()
+
 func commandQuotesf(cfg *config, args ...string) error {
 	inputName := strings.Join(args, " ")
 
 	if len(args) < 1 && cfg.currentCharacterName == "" {
-		cmdUsage := "usage: quotes <character name>"
+		cmdUsage := "usage: quotes <character name>\n"
 		cmdOptions := [][]string{
 			{"character name", "retrieve quotes from specific character"},
 		}
@@ -27,7 +29,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 		cfg.currentCharacterName = inputName
 	} else if cfg.currentCharacterName != "" && len(args) >= 1 {
 		cfg.currentCharacterName = inputName
-		cfg.currentQuotePage = 1
+		cfg.currentQuotePage = 0
 	}
 
 	cfg.currentQuotePage += 1
@@ -44,6 +46,7 @@ func commandQuotesf(cfg *config, args ...string) error {
 
 func commandQuotesb(cfg *config, args ...string) error {
 	if cfg.currentQuotePage <= 1 {
+		cfg.currentQuotePage -= 1
 		return errors.New("you're on the first page of quotes")
 	}
 
@@ -81,4 +84,5 @@ func printQuotesTable(page int, quotes []theoneapi.Quote, characterName string) 
 	}
 
 	fmt.Println(t)
+	fmt.Println(quotesHelpMessage)
 }
