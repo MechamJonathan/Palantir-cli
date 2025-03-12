@@ -81,4 +81,7 @@ func printQuotesTable(page int, quotes []theoneapi.Quote, characterName string) 
 	}
 
 	fmt.Println(t)
+	fmt.Println(styles.ErrorMessage.SetString("enter 'quotes' to go forward a page. 'quotesb' to go back a page.").Render())
+	fmt.Println(styles.ErrorMessage.SetString("or enter 'quotes <character name>' to view another character's quotes.").Render())
+
 }
