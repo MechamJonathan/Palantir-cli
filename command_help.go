@@ -13,7 +13,7 @@ func commandHelp(cfg *config, args ...string) error {
 	fmt.Println()
 	fmt.Println(styles.Title.Render("Welcome to Palantír!"))
 	fmt.Println(lipgloss.NewStyle().SetString(",---.\n<(  0  )>\n`---'").Align(lipgloss.Center).Width(70).Foreground(styles.Orange))
-	fmt.Println(styles.SubHeader.Render("The unofficial LOTR companion app.\n Made possible by The-One-Api."))
+	fmt.Println(styles.SubHeader.Render("━━━ ✧༚ The unofficial LOTR companion app. ✧༚ ━━━ \n Made possible by The-One-Api."))
 
 	commands := getCommands()
 
@@ -49,5 +49,5 @@ func printCommandHelpTable(commandNames []string, commands map[string]cliCommand
 		t.Row(cmd.name, cmd.description)
 	}
 	fmt.Println(t)
-	fmt.Println()
+	fmt.Println("")
 }
