@@ -58,7 +58,6 @@ func commandQuotesb(cfg *config, args ...string) error {
 	}
 
 	printQuotesTable(cfg.currentQuotePage, quotesResp.Docs, cfg.currentCharacterName)
-
 	return nil
 }
 
