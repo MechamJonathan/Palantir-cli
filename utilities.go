@@ -70,5 +70,4 @@ func PrintUsageTable(cmdUsage string, options [][]string) {
 
 	t.Rows(options...)
 	fmt.Println(t)
-	//MoveCursorToBottom()
 }

@@ -49,5 +49,5 @@ func printCommandHelpTable(commandNames []string, commands map[string]cliCommand
 		t.Row(cmd.name, cmd.description)
 	}
 	fmt.Println(t)
-	fmt.Println()
+	fmt.Println("")
 }
