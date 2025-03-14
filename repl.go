@@ -32,6 +32,7 @@ func startRepl(cfg *config) {
 	if err := ClearScreen(); err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
+
 	quote := getRandomQuote(startUpQuotes)
 	fmt.Println(styles.StartUpQuote.Render(quote))
 	MoveCursorToBottom()
