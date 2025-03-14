@@ -56,7 +56,6 @@ func commandGetCharacters(cfg *config, args ...string) error {
 		return fmt.Errorf("invalid option: '%s'", args[0])
 	}
 
-	fmt.Println("")
 	return nil
 }
 
