@@ -3,11 +3,10 @@ package styles
 import "github.com/charmbracelet/lipgloss"
 
 var (
-	HeaderStyle  = lipgloss.NewStyle().Foreground(Orange).Bold(true).Align(lipgloss.Center)
-	CellStyle    = lipgloss.NewStyle().Padding(0, 1)
-	OddRowStyle  = CellStyle.Foreground(LightGray)
-	EvenRowStyle = CellStyle.Foreground(Gray)
-
+	HeaderStyle   = lipgloss.NewStyle().Foreground(Orange).Bold(true).Align(lipgloss.Center)
+	CellStyle     = lipgloss.NewStyle().Padding(0, 1)
+	OddRowStyle   = CellStyle.Foreground(LightGray)
+	EvenRowStyle  = CellStyle.Foreground(Gray)
 	OddQuoteStyle = OddRowStyle.PaddingBottom(2)
 	QuoteStyle    = EvenRowStyle.PaddingBottom(2)
 )
