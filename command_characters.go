@@ -56,7 +56,6 @@ func commandGetCharacters(cfg *config, args ...string) error {
 		return fmt.Errorf("invalid option: '%s'", args[0])
 	}
 
-	fmt.Println("")
 	return nil
 }
 
@@ -65,7 +64,6 @@ func printAllCharacters(characters []theoneapi.Character) {
 	for _, character := range characters {
 		allCharacters = append(allCharacters, character.Name)
 	}
-
 	printGroupMembersTable("All Characters", allCharacters, characters)
 }
 
