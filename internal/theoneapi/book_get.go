@@ -41,6 +41,7 @@ func (c *Client) fetchBookByID(bookID string) (Book, error) {
 		if len(bookResp.Docs) > 0 {
 			return bookResp.Docs[0], nil
 		}
+
 		return Book{}, errors.New("Book not found in cached data")
 	}
 
