@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
-	"github.com/MechamJonathan/lotr-companion-app/styles"
+	"github.com/MechamJonathan/palantir-cli/internal/theoneapi"
+	"github.com/MechamJonathan/palantir-cli/styles"
 )
 
 var startUpQuotes = []string{
