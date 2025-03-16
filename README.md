@@ -1,7 +1,8 @@
-# Palintir CLI
 <p align="center">
-  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/Palantir-logo.png" width="900" title="logo">
+  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/Palantir.png" width="350" title="logo">
 </p>
+
+# Palintir CLI
 
 ![badge](https://github.com/MechamJonathan/lotr-companion-app/actions/workflows/ci.yml/badge.svg?event=pull_request)
 
