@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/MechamJonathan/lotr-companion-app/styles"
+	"github.com/MechamJonathan/palantir-cli/styles"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
 )

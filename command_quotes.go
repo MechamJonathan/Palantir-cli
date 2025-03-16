@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/MechamJonathan/lotr-companion-app/internal/theoneapi"
-	"github.com/MechamJonathan/lotr-companion-app/styles"
+	"github.com/MechamJonathan/palantir-cli/internal/theoneapi"
+	"github.com/MechamJonathan/palantir-cli/styles"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/muesli/reflow/wordwrap"
