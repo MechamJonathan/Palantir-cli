@@ -2,7 +2,7 @@
   <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/Palantir.png" width="350" title="logo">
 </p>
 
-# Palintir CLI
+# Palantír CLI
 
 ![badge](https://github.com/MechamJonathan/lotr-companion-app/actions/workflows/ci.yml/badge.svg?event=pull_request)
 
