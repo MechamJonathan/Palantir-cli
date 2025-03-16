@@ -54,6 +54,13 @@ go run .
 | quotesb     | View previous page of a character's quotes         |
 
 ## Example
+<p align="center">
+  <img src="https://github.com/MechamJonathan/lotr-companion-app/blob/main/img/Palantir.png" width="350" title="logo">
+</p>
+
+
+
+
 ```
 Lotr-Companion-App > movies
 
