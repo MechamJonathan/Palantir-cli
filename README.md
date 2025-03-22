@@ -26,8 +26,8 @@ This unofficial CLI application is designed for fans of The Lord of the Rings wh
 ### Installation 
 1. Clone the Repository:
 ```
-git clone https://github.com/MechamJonathan/lotr-companion-app
-cd lotr-companion-app
+git clone https://github.com/MechamJonathan/palintir-cli
+cd palintir-cli
 ```
 2. Create a .env file at the root of the project with the following:
 ```
