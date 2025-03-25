@@ -55,7 +55,7 @@ go run .
 | quotes      | View next page of a character's quotes             |
 | quotesb     | View previous page of a character's quotes         |
 
-## Example
+## Demo
 <p align="left">
   <img src="https://github.com/MechamJonathan/Palantir-cli/blob/main/demo.gif" width="800" title="logo">
 </p>
